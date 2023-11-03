@@ -61,6 +61,7 @@ defmodule FridayProject.WeekEnds do
     %Party{}
     |> Party.changeset(attrs)
     |> Repo.insert()
+    |> party_broadcast(:new_party)
   end
 
   @doc """
@@ -108,5 +109,41 @@ defmodule FridayProject.WeekEnds do
   """
   def change_party(%Party{} = party, attrs \\ %{}) do
     Party.changeset(party, attrs)
+  end
+
+  @doc """
+  Returns listener to Phoenix PubSub.
+
+  ## Examples
+
+      iex> blockchain_subscribe()
+      :ok
+
+  """
+  def party_subscribe do
+    Phoenix.PubSub.subscribe(FridayProject.PubSub, "party_topic")
+  end
+
+  @doc """
+  Broadcasts to the above PubSub.
+
+  ## Examples
+
+      iex> party_broadcast({:ok, %Party{}}, :specific_event)
+      {:ok, %Party{}}
+
+  """
+  def party_broadcast({:error, _reason} = error, _event) do
+    error
+  end
+
+  def party_broadcast({:ok, party}, event) do
+    Phoenix.PubSub.broadcast(
+      FridayProject.PubSub,
+      "party_topic",
+      {event, party}
+    )
+
+    {:ok, party}
   end
 end

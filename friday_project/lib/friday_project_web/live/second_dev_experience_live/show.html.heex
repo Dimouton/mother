@@ -2,7 +2,10 @@
   Second dev experience <%= @second_dev_experience.id %>
   <:subtitle>This is a second_dev_experience record from your database.</:subtitle>
   <:actions>
-    <.link patch={~p"/second_dev_experiences/#{@second_dev_experience}/show/edit"} phx-click={JS.push_focus()}>
+    <.link
+      patch={~p"/second_dev_experiences/#{@second_dev_experience}/show/edit"}
+      phx-click={JS.push_focus()}
+    >
       <.button>Edit second_dev_experience</.button>
     </.link>
   </:actions>
@@ -16,7 +19,12 @@
 
 <.back navigate={~p"/second_dev_experiences"}>Back to second_dev_experiences</.back>
 
-<.modal :if={@live_action == :edit} id="second_dev_experience-modal" show on_cancel={JS.patch(~p"/second_dev_experiences/#{@second_dev_experience}")}>
+<.modal
+  :if={@live_action == :edit}
+  id="second_dev_experience-modal"
+  show
+  on_cancel={JS.patch(~p"/second_dev_experiences/#{@second_dev_experience}")}
+>
   <.live_component
     module={FridayProjectWeb.SecondDevExperienceLive.FormComponent}
     id={@second_dev_experience.id}

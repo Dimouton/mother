@@ -7,9 +7,15 @@
   </:actions>
 </.header>
 
-<.table id="third_dev_experiences" rows={@third_dev_experiences} row_click={&JS.navigate(~p"/third_dev_experiences/#{&1}")}>
+<.table
+  id="third_dev_experiences"
+  rows={@third_dev_experiences}
+  row_click={&JS.navigate(~p"/third_dev_experiences/#{&1}")}
+>
   <:col :let={third_dev_experience} label="Name"><%= third_dev_experience.name %></:col>
-  <:col :let={third_dev_experience} label="Description"><%= third_dev_experience.description %></:col>
+  <:col :let={third_dev_experience} label="Description">
+    <%= third_dev_experience.description %>
+  </:col>
   <:col :let={third_dev_experience} label="Nb thing"><%= third_dev_experience.nb_thing %></:col>
   <:action :let={third_dev_experience}>
     <div class="sr-only">
@@ -18,7 +24,11 @@
     <.link navigate={~p"/third_dev_experiences/#{third_dev_experience}/edit"}>Edit</.link>
   </:action>
   <:action :let={third_dev_experience}>
-    <.link href={~p"/third_dev_experiences/#{third_dev_experience}"} method="delete" data-confirm="Are you sure?">
+    <.link
+      href={~p"/third_dev_experiences/#{third_dev_experience}"}
+      method="delete"
+      data-confirm="Are you sure?"
+    >
       Delete
     </.link>
   </:action>

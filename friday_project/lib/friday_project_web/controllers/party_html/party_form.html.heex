@@ -4,8 +4,12 @@
   </.error>
   <.input field={f[:date_party]} type="datetime-local" label="Date party" />
   <.input field={f[:name]} type="text" label="Name" />
-  <.input field={f[:first_dev_experience_id]} options={@first_dev_experiences} type="select"
-    label="First Experience" />
+  <.input
+    field={f[:first_dev_experience_id]}
+    options={@first_dev_experiences}
+    type="select"
+    label="First Experience"
+  />
   <:actions>
     <.button>Save Party</.button>
   </:actions>

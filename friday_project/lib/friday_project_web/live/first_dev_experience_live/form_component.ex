@@ -55,7 +55,10 @@ defmodule FridayProjectWeb.FirstDevExperienceLive.FormComponent do
   end
 
   defp save_first_dev_experience(socket, :edit, first_dev_experience_params) do
-    case Fridays.update_first_dev_experience(socket.assigns.first_dev_experience, first_dev_experience_params) do
+    case Fridays.update_first_dev_experience(
+           socket.assigns.first_dev_experience,
+           first_dev_experience_params
+         ) do
       {:ok, first_dev_experience} ->
         notify_parent({:saved, first_dev_experience})
 

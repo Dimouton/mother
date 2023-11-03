@@ -2,7 +2,10 @@
   First dev experience <%= @first_dev_experience.id %>
   <:subtitle>This is a first_dev_experience record from your database.</:subtitle>
   <:actions>
-    <.link patch={~p"/first_dev_experiences/#{@first_dev_experience}/show/edit"} phx-click={JS.push_focus()}>
+    <.link
+      patch={~p"/first_dev_experiences/#{@first_dev_experience}/show/edit"}
+      phx-click={JS.push_focus()}
+    >
       <.button>Edit first_dev_experience</.button>
     </.link>
   </:actions>
@@ -16,7 +19,12 @@
 
 <.back navigate={~p"/first_dev_experiences"}>Back to first_dev_experiences</.back>
 
-<.modal :if={@live_action == :edit} id="first_dev_experience-modal" show on_cancel={JS.patch(~p"/first_dev_experiences/#{@first_dev_experience}")}>
+<.modal
+  :if={@live_action == :edit}
+  id="first_dev_experience-modal"
+  show
+  on_cancel={JS.patch(~p"/first_dev_experiences/#{@first_dev_experience}")}
+>
   <.live_component
     module={FridayProjectWeb.FirstDevExperienceLive.FormComponent}
     id={@first_dev_experience.id}

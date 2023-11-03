@@ -6,6 +6,11 @@ defmodule FridayProjectWeb.FirstDevExperienceLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
+    if connected?(socket) do
+      # PubSub.subscribe(FridayProject.PubSub, "onchain_purchase_topic")
+      FridayProject.WeekEnds.party_subscribe()
+    end
+
     {:ok, stream(socket, :first_dev_experiences, Fridays.list_first_dev_experiences())}
   end
 
@@ -33,8 +38,24 @@ defmodule FridayProjectWeb.FirstDevExperienceLive.Index do
   end
 
   @impl true
-  def handle_info({FridayProjectWeb.FirstDevExperienceLive.FormComponent, {:saved, first_dev_experience}}, socket) do
+  def handle_info(
+        {FridayProjectWeb.FirstDevExperienceLive.FormComponent, {:saved, first_dev_experience}},
+        socket
+      ) do
     {:noreply, stream_insert(socket, :first_dev_experiences, first_dev_experience)}
+  end
+
+  def handle_info({:new_party, party}, socket) do
+    {:noreply,
+     socket
+     |> put_flash(
+       :info,
+       "une nouvelle teuf !! => #{party.name}"
+     )}
+  end
+
+  def handle_info(_, socket) do
+    {:noreply, socket}
   end
 
   @impl true

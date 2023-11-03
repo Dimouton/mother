@@ -33,7 +33,10 @@ defmodule FridayProjectWeb.SecondDevExperienceLive.Index do
   end
 
   @impl true
-  def handle_info({FridayProjectWeb.SecondDevExperienceLive.FormComponent, {:saved, second_dev_experience}}, socket) do
+  def handle_info(
+        {FridayProjectWeb.SecondDevExperienceLive.FormComponent, {:saved, second_dev_experience}},
+        socket
+      ) do
     {:noreply, stream_insert(socket, :second_dev_experiences, second_dev_experience)}
   end
 

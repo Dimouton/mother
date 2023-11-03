@@ -5,7 +5,11 @@ defmodule FridayProjectWeb.SecondDevExperienceLiveTest do
   import FridayProject.FridaysFixtures
 
   @create_attrs %{name: "some name", description: "some description", nb_thing: 42}
-  @update_attrs %{name: "some updated name", description: "some updated description", nb_thing: 43}
+  @update_attrs %{
+    name: "some updated name",
+    description: "some updated description",
+    nb_thing: 43
+  }
   @invalid_attrs %{name: nil, description: nil, nb_thing: nil}
 
   defp create_second_dev_experience(_) do
@@ -16,7 +20,10 @@ defmodule FridayProjectWeb.SecondDevExperienceLiveTest do
   describe "Index" do
     setup [:create_second_dev_experience]
 
-    test "lists all second_dev_experiences", %{conn: conn, second_dev_experience: second_dev_experience} do
+    test "lists all second_dev_experiences", %{
+      conn: conn,
+      second_dev_experience: second_dev_experience
+    } do
       {:ok, _index_live, html} = live(conn, ~p"/second_dev_experiences")
 
       assert html =~ "Listing Second dev experiences"
@@ -46,10 +53,15 @@ defmodule FridayProjectWeb.SecondDevExperienceLiveTest do
       assert html =~ "some name"
     end
 
-    test "updates second_dev_experience in listing", %{conn: conn, second_dev_experience: second_dev_experience} do
+    test "updates second_dev_experience in listing", %{
+      conn: conn,
+      second_dev_experience: second_dev_experience
+    } do
       {:ok, index_live, _html} = live(conn, ~p"/second_dev_experiences")
 
-      assert index_live |> element("#second_dev_experiences-#{second_dev_experience.id} a", "Edit") |> render_click() =~
+      assert index_live
+             |> element("#second_dev_experiences-#{second_dev_experience.id} a", "Edit")
+             |> render_click() =~
                "Edit Second dev experience"
 
       assert_patch(index_live, ~p"/second_dev_experiences/#{second_dev_experience}/edit")
@@ -69,10 +81,16 @@ defmodule FridayProjectWeb.SecondDevExperienceLiveTest do
       assert html =~ "some updated name"
     end
 
-    test "deletes second_dev_experience in listing", %{conn: conn, second_dev_experience: second_dev_experience} do
+    test "deletes second_dev_experience in listing", %{
+      conn: conn,
+      second_dev_experience: second_dev_experience
+    } do
       {:ok, index_live, _html} = live(conn, ~p"/second_dev_experiences")
 
-      assert index_live |> element("#second_dev_experiences-#{second_dev_experience.id} a", "Delete") |> render_click()
+      assert index_live
+             |> element("#second_dev_experiences-#{second_dev_experience.id} a", "Delete")
+             |> render_click()
+
       refute has_element?(index_live, "#second_dev_experiences-#{second_dev_experience.id}")
     end
   end
@@ -80,14 +98,20 @@ defmodule FridayProjectWeb.SecondDevExperienceLiveTest do
   describe "Show" do
     setup [:create_second_dev_experience]
 
-    test "displays second_dev_experience", %{conn: conn, second_dev_experience: second_dev_experience} do
+    test "displays second_dev_experience", %{
+      conn: conn,
+      second_dev_experience: second_dev_experience
+    } do
       {:ok, _show_live, html} = live(conn, ~p"/second_dev_experiences/#{second_dev_experience}")
 
       assert html =~ "Show Second dev experience"
       assert html =~ second_dev_experience.name
     end
 
-    test "updates second_dev_experience within modal", %{conn: conn, second_dev_experience: second_dev_experience} do
+    test "updates second_dev_experience within modal", %{
+      conn: conn,
+      second_dev_experience: second_dev_experience
+    } do
       {:ok, show_live, _html} = live(conn, ~p"/second_dev_experiences/#{second_dev_experience}")
 
       assert show_live |> element("a", "Edit") |> render_click() =~

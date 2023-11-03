@@ -10,11 +10,19 @@
 <.table
   id="first_dev_experiences"
   rows={@streams.first_dev_experiences}
-  row_click={fn {_id, first_dev_experience} -> JS.navigate(~p"/first_dev_experiences/#{first_dev_experience}") end}
+  row_click={
+    fn {_id, first_dev_experience} ->
+      JS.navigate(~p"/first_dev_experiences/#{first_dev_experience}")
+    end
+  }
 >
   <:col :let={{_id, first_dev_experience}} label="Name"><%= first_dev_experience.name %></:col>
-  <:col :let={{_id, first_dev_experience}} label="Description"><%= first_dev_experience.description %></:col>
-  <:col :let={{_id, first_dev_experience}} label="Nb thing"><%= first_dev_experience.nb_thing %></:col>
+  <:col :let={{_id, first_dev_experience}} label="Description">
+    <%= first_dev_experience.description %>
+  </:col>
+  <:col :let={{_id, first_dev_experience}} label="Nb thing">
+    <%= first_dev_experience.nb_thing %>
+  </:col>
   <:action :let={{_id, first_dev_experience}}>
     <div class="sr-only">
       <.link navigate={~p"/first_dev_experiences/#{first_dev_experience}"}>Show</.link>
@@ -31,7 +39,12 @@
   </:action>
 </.table>
 
-<.modal :if={@live_action in [:new, :edit]} id="first_dev_experience-modal" show on_cancel={JS.patch(~p"/first_dev_experiences")}>
+<.modal
+  :if={@live_action in [:new, :edit]}
+  id="first_dev_experience-modal"
+  show
+  on_cancel={JS.patch(~p"/first_dev_experiences")}
+>
   <.live_component
     module={FridayProjectWeb.FirstDevExperienceLive.FormComponent}
     id={@first_dev_experience.id || :new}

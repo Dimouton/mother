@@ -3,6 +3,9 @@
   <:subtitle>Use this form to manage third_dev_experience records in your database.</:subtitle>
 </.header>
 
-<.third_dev_experience_form changeset={@changeset} action={~p"/third_dev_experiences/#{@third_dev_experience}"} />
+<.third_dev_experience_form
+  changeset={@changeset}
+  action={~p"/third_dev_experiences/#{@third_dev_experience}"}
+/>
 
 <.back navigate={~p"/third_dev_experiences"}>Back to third_dev_experiences</.back>
