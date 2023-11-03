@@ -24,26 +24,26 @@ services:
     volumes:
       - "${PWD}/postgres_repo/postgres-data:/var/lib/postgresql/data"
 
-  mvp-elixir:
-    hostname: "mvp-elixir"
-    image: elixir:1.15.4
-    container_name: elixir_container
-    environment:
-      <<: *elixir-variables
-    ports:
-      - "4000:4000"
-    restart: on-failure
-    volumes:
-      - "${PWD}/elixir_repo:/usr/src/myapp"
-    command:
-    - /bin/bash
-    - -c 
-    - |
-      cd /usr/src/myapp/friday_project/
-      mix deps.get
-      mix deps.compile
-      mix ecto.create
-      mix ecto.migrate
-      echo "Y" | mix phx.server
-    #  - bash -c "cd friday_project && mix phx.server"
+  # mvp-elixir:
+  #   hostname: "mvp-elixir"
+  #   image: elixir:1.15.4
+  #   container_name: elixir_container
+  #   environment:
+  #     <<: *elixir-variables
+  #   ports:
+  #     - "4000:4000"
+  #   restart: on-failure
+  #   volumes:
+  #     - "${PWD}/elixir_repo:/usr/src/myapp"
+  #   command:
+  #   - /bin/bash
+  #   - -c 
+  #   - |
+  #     cd /usr/src/myapp/friday_project/
+  #     mix deps.get
+  #     mix deps.compile
+  #     mix ecto.create
+  #     mix ecto.migrate
+  #     echo "Y" | mix phx.server
+  #   #  - bash -c "cd friday_project && mix phx.server"
 
